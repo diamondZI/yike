@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model wine_cet4_word {
+  id              Int     @id @default(autoincrement())
+  cet4_word       String? @db.VarChar(255)
+  cet4_phonetic   String? @db.VarChar(255)
+  cet4_translate  String? @db.Text
+  cet4_distortion String? @db.Text
+  cet4_phrase     String? @db.Text
+  cet4_samples    String? @db.Text
+}
+model User{
+  id Int @id @default(autoincrement())
+  name String @unique
+  email String
+  sex String?
+  password String
+  birthday_Date DateTime? 
+  state String?
+
+}
+
