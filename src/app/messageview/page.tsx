@@ -14,7 +14,8 @@ interface Message{
   Reply:number,
 }
 export default function page(){
-    const [active]=useState('f1')
+    const [active,useactive]=useState('全部')
+    const ClassificationArray=['全部','留言','目标','理想','过去','将来','爱情','亲情','友情','秘密','信条','无题']
     const [messages,usemessages]=useState<Message[]>([
       {
         author:"一个大西瓜",
@@ -52,7 +53,7 @@ export default function page(){
     return <div className="min-h-[calc(100vh-2.5rem)]">
      {/* <h1>你好</h1> */}
     <TitleName title="留言墙" message="很多事情值得记录,当然也值得回味"></TitleName>
-    <Classification Classification={['f1','fas','asd']} active="fas"></Classification>
+    <Classification Classification={ClassificationArray} active={active} useactive={useactive}></Classification>
      <div className="flex justify-center flex-wrap" >
       {
         messages.map(messages=>{
