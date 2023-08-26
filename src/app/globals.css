@@ -9,4 +9,6 @@
 }
 .firstdemo:active{
     color: antiquewhite;
-}
+       transform: translateX();
+  }
+

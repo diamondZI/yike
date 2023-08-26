@@ -15,23 +15,19 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       keyframes:{
-        linkup:{
-          '0%':{
-             opacity:'1'
-          },
-          "100%":{
-            opacity:'0'
-          }
+        wiggle: {
+          '0%': { transform:'translateX(100%)' },
+          
+          '100%': { transform:'translateX(0)' },
         }
       }
     },
     animation:{
       
-      'animation-linkup':'linkup 1s liner all'
+        wiggle: 'wiggle .5s ',
+    
     },
-    fontFamily:{
-      'message':'Bradley Hand ITC'
-    },
+    
     colors:{
       yellow :'#edf709',
       greenyellow:'#a4f12f',

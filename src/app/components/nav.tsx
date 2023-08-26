@@ -2,14 +2,14 @@ import Link from 'next/link'
 export default function Nav({route}:{route:boolean}){
    
   return <>
-  <nav className='flex flex-1 text-xs sm:text-lg   justify-around w-full   bg-yellowbody h-10 items-center p-2'>
+  <nav className='flex flex-1   justify-center w-full   bg-yellowbody h-10 items-center p-2'>
 
- <Link href={"home"} className='flex flex-1 items-center' > 
+ <Link href={"home"} className='flex absolute left-2 items-center' > 
 
   <img src="../favicon.ico" alt="logo"  className='w-8 h-8 m-2'/>
-  <h1 className='text-xl font-bold'>一刻时光</h1> 
+  <h1 className='text-xl font-bold hidden sm:flex'>一刻时光</h1> 
  </Link>
- <div  className='flex-1  flex sm:justify-center justify-end' >
+ <div  className=' flex sm:justify-center justify-end' >
 
  <span className={`m-1 py-1 px-3   ${route?' bg-dodgerblue text-textcolor rounded-xl':''} `}>
   <Link  href='/messageview' >
@@ -23,7 +23,7 @@ export default function Nav({route}:{route:boolean}){
 </Link> 
  </span>
  </div>
- <div className='flex-1 sm:flex none'></div> 
+
   </nav>
   </>
 }
