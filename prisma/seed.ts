@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 async function main() {
   console.log(`Start seeding ...`)
-    const user = await prisma.wine_cet4_word.findMany()
+    const user = await prisma.user.findMany()
   console.log(`Seeding finished. `, user)
 }
 

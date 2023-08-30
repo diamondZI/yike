@@ -13,12 +13,12 @@ import Classification from './Classification';
 export default function Nav({Message}:{Message:Message}){
    
   return <>
-  <div className='flex flex-col justify-between  shadow-darkorange shadow-sm w-64 p-2 bg-darkorange h-48'>
+  <div className='flex  flex-col justify-between  shadow-darkorange shadow-sm w-[12rem] p-1 bg-darkorange h-40'>
     <div className='flex-3 flex justify-between text-xs '>
       <span>{Message.time}</span>
        <span>{Message.state}</span>
     </div>
-    <section className='flex-1 p-2'>
+    <section className='flex-1 p-2 text-sm'>
     {Message.content}
     </section>
     <div  className='flex-3 flex'>
@@ -36,7 +36,7 @@ export default function Nav({Message}:{Message:Message}){
         {Message.author}
       </div>
     </div>
-  
+   
   </div>
   </>
 }
