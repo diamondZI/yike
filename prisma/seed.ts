@@ -1,9 +1,6 @@
 import { PrismaClient, Prisma } from '@prisma/client'
 
 const prisma = new PrismaClient()
-
-
-
 async function main() {
   console.log(`Start seeding ...`)
     const user = await prisma.user.findMany()
