@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 export default function Nav({route}:{route:boolean}){
    
   return <>
@@ -6,7 +7,7 @@ export default function Nav({route}:{route:boolean}){
 
  <Link href={"home"} className='flex absolute left-2 items-center' > 
 
-  <img src="../favicon.ico" alt="logo"  className='w-8 h-8 m-2'/>
+  <Image src="../favicon.ico" alt="logo"  className='w-8 h-8 m-2'/>
   <h1 className='text-xl font-bold hidden sm:flex'>一刻时光</h1> 
  </Link>
  <div  className=' flex sm:justify-center justify-end' >

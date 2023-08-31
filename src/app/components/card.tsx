@@ -8,7 +8,7 @@ interface Message{
   content:string,
   Reply:number,
 }
-import {MaterialSymbolsEcgHeartOutline,MaterialSymbolsChatOutlineSharp} from './icon';
+import {MaterialSymbolsEcgHeartOutline,MaterialSymbolsChatOutlineSharp} from '../../until/icon';
 import Classification from './Classification';
 export default function Nav({Message}:{Message:Message}){
    

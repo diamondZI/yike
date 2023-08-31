@@ -1,5 +1,6 @@
-import {MaterialSymbolsClose} from '@/app/components/icon'
+import {MaterialSymbolsClose} from '@/until/icon'
 import Card from '@/app/components/card'
+import Image from 'next/image'
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 import { useState } from 'react'
 import Classification from './Classification'
@@ -55,7 +56,7 @@ export const Read= ({message,display,usedisply}:{message:Message,display:boolean
             return <div key={index}>
               <div className='flex  p-1 mb-3   '>
                 <section className='m-1 f-3'>
-                  <img className='w-10 h-10 rounded-full' src={el.Headphoto} alt="" />
+                  <Image className='w-10 h-10 rounded-full' src={el.Headphoto} alt="" />
                 </section>
                 <section className='flex-1'>
                   <span className='text-sm font-serif'>{el.name} {el.time}</span>

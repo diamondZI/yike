@@ -6,13 +6,13 @@ import Card from '@/app/components/card'
 import {Read as Readview,Write as Writeview} from '@/app/components/form'
 import { useState } from "react";
 import {useAutoAnimate} from '@formkit/auto-animate/react'
-import {MaterialSymbolsAddCircleOutlineRounded} from '@/app/components/icon'
-export default function page(){
+import {MaterialSymbolsAddCircleOutlineRounded} from '@/until/icon'
+export default function Page(){
     const [active,useactive]=useState('全部')
-    const [display,usedisply] = useState(false)
-    const [create,addCreate] = useState(false)
+    const [display,usedisply] =useState(false)
+    const [create,addCreate] =useState(false)
     const ClassificationArray=['全部','留言','目标','理想','过去','将来','爱情','亲情','友情','秘密','信条','无题']
-    const [messages,usemessages]=useState<Message[]>([
+    const [messages]=useState<Message[]>([
       {
         author:"一个大西瓜",
         time:'2020-12-12',
@@ -82,7 +82,7 @@ export default function page(){
 
      </div>
     </div>
-    // 这个组件可以抽出遮罩层DRAW
+    {/* // 这个组件可以抽出遮罩层DRAW */}
      <Readview  message={messages[0]} display={display} usedisply={usedisply}></Readview>
      <Writeview display={create} usedisply={addCreate}></Writeview>
     </>

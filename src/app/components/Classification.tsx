@@ -1,7 +1,7 @@
-'use client'
-export default (
+
+export default  function Classification(
   {Classification,active,useactive}:{Classification:string[],active:string,useactive:Function}
-  )=>{
+  ){
   return <>
   <div className="flex flex-wrap  p-1 mt-3 justify-center  ">
    {Classification.map((el,index)=>
