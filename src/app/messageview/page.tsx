@@ -7,6 +7,7 @@ import {Read as Readview,Write as Writeview} from '@/app/components/form'
 import { useState } from "react";
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 import {MaterialSymbolsAddCircleOutlineRounded} from '@/until/icon'
+import Drawer from '../components/Drawer'
 export default function Page(){
     const [active,useactive]=useState('全部')
     const [display,usedisply] =useState(false)
@@ -83,7 +84,12 @@ export default function Page(){
      </div>
     </div>
     {/* // 这个组件可以抽出遮罩层DRAW */}
-     <Readview  message={messages[0]} display={display} usedisply={usedisply}></Readview>
-     <Writeview display={create} usedisply={addCreate}></Writeview>
+    
+     <Drawer mode='Read' show={display} setshow={usedisply}>
+      <Readview message={messages[0]}></Readview>
+     </Drawer>
+     <Drawer mode='Write' show={create} setshow={addCreate}>
+      <Writeview ></Writeview>
+     </Drawer>
     </>
 }

@@ -8,14 +8,47 @@ datasource db {
     url= env("POSTGRES_PRISMA_URL") // uses connection pooling
     directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
-model User {
-  id    Int     @id @default(autoincrement())
-  name  String?
-  created_time DateTime
-  email String  @unique
-  password String
-
+model Note {
+  id       Int      @id @default(autoincrement())
+  title    String
+  content  String
+  userId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status   Status   @relation(fields: [statusId], references: [id])
+  statusId Int
+  url String 
+  replies  Reply[]
+  user     User     @relation(fields: [userId], references: [id])
 }
+
+model Status {
+  id          Int      @id @default(autoincrement())
+  name        String
+  imgname String?
+  notes  Note[]
+}
+
+model Reply {
+  id       Int      @id @default(autoincrement())
+  content  String
+  userId   Int
+  noteId   Int
+  createdAt DateTime @default(now())
+  note     Note     @relation(fields: [noteId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  email    String   @unique
+  password String
+  createdAt DateTime @default(now())
+  notes    Note[]
+  replies  Reply[]
+}
+
 
 
 

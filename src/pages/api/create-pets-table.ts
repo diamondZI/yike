@@ -5,15 +5,13 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
+  const a=request.body
+  
   try {
-    const result = await prisma.user.create({
-      data:{
-        name:"user",
-        email:"user@vercel",
-        password:"password",
-        created_time: new Date(),
-      }
-    })
+
+    const result = await prisma.user.findMany();
+    console.log(a);
+    
     return response.status(200).json({ result });
   } catch (error) {
     return response.status(500).json({ error });

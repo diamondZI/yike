@@ -1,10 +1,10 @@
-import {MaterialSymbolsClose} from '@/until/icon'
+
 import Card from '@/app/components/card'
 import Image from 'next/image'
-import {useAutoAnimate} from '@formkit/auto-animate/react'
+
 import { useState } from 'react'
 import Classification from './Classification'
-export const Read= ({message,display,usedisply}:{message:Message,display:boolean,usedisply:Function})=>{
+export const Read= ({message}:{message:Message})=>{
   const arr: Reply[]=[{
     name:'匿名',
     time:'2017/12/12',
@@ -20,23 +20,7 @@ export const Read= ({message,display,usedisply}:{message:Message,display:boolean
 
   }
   ]
-  const [Auto,username]=useAutoAnimate({
-    duration:2000,
-  })
   return <>
-    {display? <div  className='fixed ease-in-out opacity-1 transition-opacity w-[100%] h-[100%] bg-[rgb(0,0,0..8)] top-0 left-0 '>
-    
-  
-    <div  className="p-2 animate-wiggle   right-0  w-72 h-[100%] bg-textcolor absolute flex flex-col items-center">
-       <div className='w-full mb-2  flex  items-center justify-between'>
-        <span className="text-sm ">
-          <a href="" className="text-buttoncolor m-1 ">联系墙主撕掉该标签</a>
-          <a className="text-[red] m-1">举报</a>
-        </span>
-         <span>
-          <MaterialSymbolsClose onClick={()=>{usedisply(false)}} className='text-lg'/>
-         </span>
-       </div>
        <section>
         <Card Message={message}/>
        </section>
@@ -56,7 +40,7 @@ export const Read= ({message,display,usedisply}:{message:Message,display:boolean
             return <div key={index}>
               <div className='flex  p-1 mb-3   '>
                 <section className='m-1 f-3'>
-                  <Image className='w-10 h-10 rounded-full' src={el.Headphoto} alt="" />
+                  {/* <Image width={30} height={30} className='w-10 h-10 rounded-full' src={el.Headphoto} alt="" /> */}
                 </section>
                 <section className='flex-1'>
                   <span className='text-sm font-serif'>{el.name} {el.time}</span>
@@ -72,36 +56,19 @@ export const Read= ({message,display,usedisply}:{message:Message,display:boolean
           })
         } 
        </section>
-    </div>
-    </div>:null}
-  </>
+    
+     </>
   
  
 }
-export const Write= ({display,usedisply}:{display:boolean,usedisply:Function})=>{
+export const Write= ()=>{
   const Color=[ 'yellow','dodgerblue','yellowbody','darkorange', 'buttoncolor'
- ]
- const [active,useactive]=useState('全部')
-  const [bgcolor,changeBgcolor]=useState('yellow')
-  const [Auto,username]=useAutoAnimate({
-    duration:2000,
-  })
+   ]
+    const [active,useactive]=useState('全部')
+    const [bgcolor,changeBgcolor]=useState('yellow')
   const ClassificationArray=['全部','留言','目标','理想','过去','将来','爱情','亲情','友情','秘密','信条','无题']
 
   return <>
-    {display? <div  className='fixed ease-in-out opacity-1 transition-opacity w-[100%] h-[100%] bg-[rgb(0,0,0..8)] top-0 left-0 '>
-    
-  
-    <div  className="p-2 animate-wiggle   right-0  w-72 h-[100%] bg-textcolor absolute flex flex-col items-center">
-       <div className='w-full mb-2  flex  items-center justify-between'>
-        <span className="text-sm ">
-          <a href="" className="text-[black] m-1 ">写留言</a>
-          
-        </span>
-         <span>
-          <MaterialSymbolsClose onClick={()=>{usedisply(false)}} className='text-lg'/>
-         </span>
-       </div>
        <section className='flex w-full'>
         {Color.map((el,index)=>{
           return <div key={index} onClick={()=>{changeBgcolor(el)}} className={`w-5 m-2 h-5 bg-${el} ${el===bgcolor?'border border-buttoncolor border-solid':null} `}></div>
@@ -115,11 +82,9 @@ export const Write= ({display,usedisply}:{display:boolean,usedisply:Function})=>
        <Classification Classification={ClassificationArray} active={active} useactive={useactive}></Classification>
        </section>
        <section className='flex justify-around w-full h-8 px-1 absolute bottom-4'>
-        <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' >丢弃</button>
-        <button className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor'>确认</button>
+          <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' >丢弃</button>
+          <button className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor'>确认</button>
        </section>
-    </div>
-    </div>:null}
   </>
   
  

@@ -1,12 +1,13 @@
 import Link from 'next/link'
 interface Message{
-  // id: string,
   author:string
   time: string,
   state: string,
   Like:number,
   content:string,
   Reply:number,
+  url?:string
+  
 }
 import {MaterialSymbolsEcgHeartOutline,MaterialSymbolsChatOutlineSharp} from '../../until/icon';
 import Classification from './Classification';
