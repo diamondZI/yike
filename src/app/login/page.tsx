@@ -1,7 +1,7 @@
 'use client'
 
 import {MaterialSymbolsClose} from '@/until/icon'
-import {useForm,SubmitHandler} from 'react-hook-form'
+import {useForm as UseForm,SubmitHandler} from 'react-hook-form'
 import Image from 'next/image'
 import {inter} from '@/style/font'
 interface User{
@@ -11,7 +11,7 @@ interface User{
 }
 
 export default function page(){
- const {register,handleSubmit,watch,formState:{errors}}=useForm<User>({
+ const {register,handleSubmit,watch,formState:{errors}}=UseForm<User>({
  })
  const onSubmit: SubmitHandler<User>=async (data) => {
     const res=await fetch('api/createUser',{method:'POST',body:JSON.stringify(data)}).then(response =>response.json())
