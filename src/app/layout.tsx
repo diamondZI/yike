@@ -1,8 +1,8 @@
 'use client'
 import './globals.css'
 
-import Nav from '@/app/components/nav'
-import Footer from '@/app/components/footer'
+import Nav from '@/components/nav'
+import Footer from '@/components/footer'
 import {usePathname} from 'next/navigation'
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 export default function RootLayout({

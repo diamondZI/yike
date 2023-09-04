@@ -9,7 +9,7 @@ interface Message{
   url?:string
   
 }
-import {MaterialSymbolsEcgHeartOutline,MaterialSymbolsChatOutlineSharp} from '../../until/icon';
+import {MaterialSymbolsEcgHeartOutline,MaterialSymbolsChatOutlineSharp} from '../until/icon';
 import Classification from './Classification';
 export default function Nav({Message}:{Message:Message}){
    

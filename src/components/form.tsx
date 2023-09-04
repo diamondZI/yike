@@ -1,5 +1,5 @@
 
-import Card from '@/app/components/card'
+import Card from '@/components/card'
 import Image from 'next/image'
 
 import { useState } from 'react'

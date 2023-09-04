@@ -1,9 +1,9 @@
 'use client'
 
-import TitleName from '@/app/components/titleName'
-import Classification from '@/app/components/Classification'
-import Drawer from '@/app/components/Drawer'
-import {Write} from '@/app/components/form'
+import TitleName from '@/components/titleName'
+import Classification from '@/components/Classification'
+import Drawer from '@/components/Drawer'
+import {Write} from '@/components/form'
 import { useState } from "react";
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 import {MaterialSymbolsAddCircleOutlineRounded} from '@/until/icon'

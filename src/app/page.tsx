@@ -1,5 +1,5 @@
 'use client'
-import Title from '@/app/components/titleName'
+import Title from '@/components/titleName'
 import {useState} from 'react'
 import Link from 'next/link'
 import {useAutoAnimate} from '@formkit/auto-animate/react'

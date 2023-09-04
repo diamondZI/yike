@@ -1,13 +1,13 @@
 'use client'
 
-import TitleName from '@/app/components/titleName'
-import Classification from '@/app/components/Classification'
-import Card from '@/app/components/card'
-import {Read as Readview,Write as Writeview} from '@/app/components/form'
+import TitleName from '@/components/titleName'
+import Classification from '@/components/Classification'
+import Card from '@/components/card'
+import {Read as Readview,Write as Writeview} from '@/components/form'
 import { useState } from "react";
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 import {MaterialSymbolsAddCircleOutlineRounded} from '@/until/icon'
-import Drawer from '../components/Drawer'
+import Drawer from '../../components/Drawer'
 export default function Page(){
     const [active,useactive]=useState('全部')
     const [display,usedisply] =useState(false)
