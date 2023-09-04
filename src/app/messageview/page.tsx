@@ -58,13 +58,8 @@ export default function Page(){
     const [parent,endable]=useAutoAnimate({
       duration:300
     })
-    // 实际获取数据时这里要得到id方便读取数据
-    const Fromshowup=()=>{
-     usedisply(true)
-      
-    }
     return <>
-    <div className="min-h-[calc(100vh-2.5rem)]">
+    <div >
      {/* <h1>你好</h1> */}
     <TitleName title="留言墙" message="很多事情值得记录,当然也值得回味"></TitleName>
     <div className='px-12 transition-all' >
@@ -74,7 +69,7 @@ export default function Page(){
      <div className="flex justify-center flex-wrap " ref={parent} >
       {
         messages.map((messages,index)=>{
-        return  messages.state===active||active==='全部'?<div key={index} onClick={()=>{Fromshowup()}} className='hover:border-2 hover:border-solid hover:border-yellow m-2'><Card    Message={messages} ></Card></div>:null
+        return  messages.state===active||active==='全部'?<div key={index} onClick={()=>{usedisply(true)}} className='hover:border-2 hover:border-solid hover:border-yellow m-2'><Card    Message={messages} ></Card></div>:null
         })
       }
      </div>
@@ -83,7 +78,6 @@ export default function Page(){
 
      </div>
     </div>
-    {/* // 这个组件可以抽出遮罩层DRAW */}
     
      <Drawer mode='Read' show={display} setshow={usedisply}>
       <Readview message={messages[0]}></Readview>

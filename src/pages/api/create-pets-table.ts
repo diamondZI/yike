@@ -9,10 +9,16 @@ export default async function handler(
   
   try {
 
-    const result = await prisma.user.findMany();
+    // const result = await prisma.user.create({
+    //   data:{
+    //     username: a.username,
+    //     password: a.password,
+    //     email: a.email
+    //   }
+    // })
     console.log(a);
     
-    return response.status(200).json({ result });
+    return response.status(200).json({ a });
   } catch (error) {
     return response.status(500).json({ error });
   }
