@@ -58,6 +58,16 @@ export default function Page(){
     const [parent,endable]=useAutoAnimate({
       duration:300
     })
+    const addCard=async function(){
+      const token =localStorage.getItem('token')  as string  
+      const res=await fetch('api/createCard',{method:'POST',headers:
+    new Headers({'Authorization': token })}).then(response =>response.json())
+
+      console.log(res);
+
+    }
+    
+    
     return <>
     <div >
      {/* <h1>你好</h1> */}
@@ -83,7 +93,7 @@ export default function Page(){
       <Readview message={messages[0]}></Readview>
      </Drawer>
      <Drawer mode='Write' show={create} setshow={addCreate}>
-      <Writeview ></Writeview>
+      <Writeview addCard={addCard}></Writeview>
      </Drawer>
     </>
 }

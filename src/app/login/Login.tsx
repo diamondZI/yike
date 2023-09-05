@@ -10,8 +10,15 @@ export default function moduleName(){
   const {register,handleSubmit,watch,formState:{errors}}=UseForm<User>({
   })
   const onSubmit: SubmitHandler<User>=async (data) => {
-    const res=await fetch('api/loginUser',{method:'POST',body:JSON.stringify(data)}).then(response =>response.json())
-  console.log(res);
+    const res=await fetch('api/loginUser',{method:'POST',headers:{
+      
+    } , body:JSON.stringify(data)}).then(response =>response.json())
+     const {token}=res
+console.log(res);
+
+     if (token) {
+      localStorage.setItem('token',token)
+     }
   }
 
   return <form className='flex flex-col items-center w-full' onSubmit={handleSubmit(onSubmit)}>

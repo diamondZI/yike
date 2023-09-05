@@ -61,13 +61,13 @@ export const Read= ({message}:{message:Message})=>{
   
  
 }
-export const Write= ()=>{
+export const Write= ({addCard}:{addCard:Function})=>{
   const Color=[ 'yellow','dodgerblue','yellowbody','darkorange', 'buttoncolor'
    ]
     const [active,useactive]=useState('全部')
     const [bgcolor,changeBgcolor]=useState('yellow')
   const ClassificationArray=['全部','留言','目标','理想','过去','将来','爱情','亲情','友情','秘密','信条','无题']
-
+  
   return <>
        <section className='flex w-full'>
         {Color.map((el,index)=>{
@@ -83,7 +83,7 @@ export const Write= ()=>{
        </section>
        <section className='flex justify-around w-full h-8 px-1 absolute bottom-4'>
           <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' >丢弃</button>
-          <button className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor'>确认</button>
+          <button onClick={()=>{addCard()}} className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor'>确认</button>
        </section>
   </>
   

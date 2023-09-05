@@ -6,9 +6,20 @@ import Image from 'next/image'
 import {inter} from '@/style/font'
 import Register from './Register';
 import Login from './Login';
+import { setTimeout } from 'timers';
 
 
 export default function page(){
+  const GET =  async function(){
+  const token =localStorage.getItem('token')  as string  
+  const res=await fetch('api/get',{method:'GET',headers:
+    new Headers({'Authorization': token })}).then(response =>response.json())
+
+console.log(res);
+
+  
+}
+    //  headers:new Headers({'Authorization':token})
   return <div className='relative bg-textcolor shadow-sm md:rounded-md shadow-buttoncolor w-full h-[calc(100vh-2.5rem)] md:w-96 md:h-[31.25rem] border-yellow px-3 border border-solid '>
           <div className='flex justify-center  h-12 w-full '>
 <MaterialSymbolsClose className='text-lg hover:-translate-y-1 transition absolute left-2 top-3 '/>
@@ -18,5 +29,7 @@ export default function page(){
          <Register/>
        <Divider position_mode='center'>或</Divider>
      <Login/>
+
+     <button onClick={()=>{GET()}}>你哦啊</button>
       </div>
 }
