@@ -10,7 +10,7 @@ export default function moduleName(){
   const {register,handleSubmit,watch,formState:{errors}}=UseForm<User>({
   })
   const onSubmit: SubmitHandler<User>=async (data) => {
-    const res=await fetch('api/createUser',{method:'POST',body:JSON.stringify(data)}).then(response =>response.json())
+    const res=await fetch('api/User/POST',{method:'POST',body:JSON.stringify(data)}).then(response =>response.json())
   console.log(data);
   }
 

@@ -10,8 +10,7 @@ export default function moduleName(){
   const {register,handleSubmit,watch,formState:{errors}}=UseForm<User>({
   })
   const onSubmit: SubmitHandler<User>=async (data) => {
-    const res=await fetch('api/loginUser',{method:'POST',headers:{
-      
+    const res=await fetch('api/User/Get/login',{method:'POST',headers:{
     } , body:JSON.stringify(data)}).then(response =>response.json())
      const {token}=res
 console.log(res);

@@ -1,11 +1,13 @@
 declare interface Message{
-  // id: string,
-  author:string
-  time: string,
-  state: string,
-  Like:number,
+  id: number,
+  title:string
+  updatedAt: string,
+  statusId: number,
+  Like?:number,
   content:string,
-  Reply:number,
+  Reply:[],
+  url?:string
+  createdAt:string
 }
 declare interface Reply{
   name:string, 

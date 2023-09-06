@@ -8,7 +8,7 @@ import {MaterialSymbolsClose} from '@/until/icon'
 export default function  Drawer({show,setshow,children,mode}:Drawertype){
     return <>
       {show ? <div onDoubleClick={()=>{setshow(false)
-      }}  className='fixed ease-in-out opacity-1 transition-opacity w-[100%] h-[100%] bg-[rgb(0,0,0..8)] top-0 left-0 '>
+      }}  className='fixed ease-in-out opacity-1 transition-opacity w-[100%] h-[100%] bg-[rgb(0,0,0,.1)] top-0 left-0 '>
       <div  onClick={(e)=>{e.stopPropagation()
       }}
         className="p-2 animate-wiggle   right-0  w-72 h-[100%] bg-textcolor absolute flex flex-col items-center">

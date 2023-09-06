@@ -1,25 +1,23 @@
-
 import Card from '@/components/card'
-import Image from 'next/image'
-
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Classification from './Classification'
+import {useForm as UseForm,SubmitHandler, useForm, Form} from 'react-hook-form';
 export const Read= ({message}:{message:Message})=>{
-  const arr: Reply[]=[{
-    name:'匿名',
-    time:'2017/12/12',
-    Headphoto:'https://images.unsplash.com/photo-1524088484081-4ca7e08e3e19?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    content:"非常好的内容,爱来自山西",
-
-  },
-  {
-    name:'匿名',
-    time:'2017/12/12',
-    Headphoto:'https://images.unsplash.com/photo-1524088484081-4ca7e08e3e19?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    content:"非常好的内容,爱来自山西",
-
+  const arr: Reply[]=[]
+  
+  const Reply=async ()=>{
+    console.log(message.id);
+    const MessageReply=await fetch('api/Reply/Get',{
+      method: 'POST',
+      body:JSON.stringify({
+        noteId:message.id
+      }) 
+    }).then(res=>res.json())
+    console.log(MessageReply);
+    
   }
-  ]
+ 
+  
   return <>
        <section>
         <Card Message={message}/>
@@ -34,7 +32,7 @@ export const Read= ({message}:{message:Message})=>{
          </form>
        </section>
        <section className='w-full flex flex-col justify-start overflow-y-auto'>
-        <span>评论 123</span>
+        <span onClick={()=>{Reply()}}>评论 {arr.length}</span>
         {
           arr.map((el,index)=>{
             return <div key={index}>
@@ -61,30 +59,43 @@ export const Read= ({message}:{message:Message})=>{
   
  
 }
-export const Write= ({addCard}:{addCard:Function})=>{
-  const Color=[ 'yellow','dodgerblue','yellowbody','darkorange', 'buttoncolor'
-   ]
-    const [active,useactive]=useState('全部')
+export const Write= ({CreateCard}:{CreateCard:Function})=>{
+  const Color=[ 'yellow','dodgerblue','yellowbody','darkorange']
+  const {register,setValue,handleSubmit}=UseForm<Message>()
+  const onSubmit: SubmitHandler<Message>=async (data) => {
+     let res= await CreateCard({UserId:2,url:'NULL',...data})
+  console.log(res);
+  
+  }
+
+    const [active,useactive]=useState(1)
+    const Useactive=(a:number)=>{
+      useactive(a)
+      setValue('statusId',a)
+    }
     const [bgcolor,changeBgcolor]=useState('yellow')
   const ClassificationArray=['全部','留言','目标','理想','过去','将来','爱情','亲情','友情','秘密','信条','无题']
   
   return <>
-       <section className='flex w-full'>
+      <form onSubmit={handleSubmit(onSubmit)}>
+      <section className='flex w-full'>
         {Color.map((el,index)=>{
           return <div key={index} onClick={()=>{changeBgcolor(el)}} className={`w-5 m-2 h-5 bg-${el} ${el===bgcolor?'border border-buttoncolor border-solid':null} `}></div>
         })}
        </section>
        <section className={`bg-${bgcolor} p-1 w-full h-56`}>
-       <textarea placeholder='留言...' className='bg-[rgb(0,0,0,0)] outline-none h-44 w-full '></textarea>
-       <input placeholder='留言...' className='bg-[rgb(0,0,0,0)] p-1 text-sm outline-none border-2 border-solid border-textcolor w-full'></input>
+       <textarea placeholder='留言...' {...register('content')} className='bg-[rgb(0,0,0,0)] outline-none h-44 w-full '></textarea>
+       <input placeholder='留言...' {...register('title')} className='bg-[rgb(0,0,0,0)] p-1 text-sm outline-none border-2 border-solid border-textcolor w-full'></input>
        </section>
        <section className='w-full'>
-       <Classification Classification={ClassificationArray} active={active} useactive={useactive}></Classification>
+       <Classification Classification={ClassificationArray} active={active} useactive={Useactive} {...register('statusId')}></Classification>
        </section>
        <section className='flex justify-around w-full h-8 px-1 absolute bottom-4'>
-          <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' >丢弃</button>
-          <button onClick={()=>{addCard()}} className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor'>确认</button>
+          <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' onClick={()=>{}}>丢弃</button>
+          <button type='submit' onClick={()=>{}} className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor' >确认</button>
        </section>
+      </form>
+
   </>
   
  
