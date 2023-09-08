@@ -11,10 +11,10 @@ export default async function handler(
   try {
     const result = await prisma.reply.findMany({
       where:{
-        noteId: a.noteId,
+        noteId: a.NoteId,
       }
     })
-    return response.status(200).json({ ok:'删除成功' ,data:result});
+    return response.status(200).json({ ok:'更新成功' ,data:result});
   } catch (error) {
     return response.status(500).json({ error });
   }

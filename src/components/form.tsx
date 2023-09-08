@@ -2,51 +2,72 @@ import Card from '@/components/card'
 import { useEffect, useState } from 'react'
 import Classification from './Classification'
 import {useForm as UseForm,SubmitHandler, useForm, Form} from 'react-hook-form';
+
 export const Read= ({message}:{message:Message})=>{
-  const arr: Reply[]=[]
+  const [AllReply,setAllReply]=useState<Replytype[]>([])
   
-  const Reply=async ()=>{
-    console.log(message.id);
-    const MessageReply=await fetch('api/Reply/Get',{
+  const Reply=async (data:Replytype)=>{
+    const MessageReply=await fetch('api/Reply/Post',{
       method: 'POST',
-      body:JSON.stringify({
-        noteId:message.id
-      }) 
+      body:JSON.stringify(data) ,
+      headers: new Headers({'authorization':localStorage.getItem('token') as string}) 
     }).then(res=>res.json())
     console.log(MessageReply);
+
     
   }
+  const GetReply=async ()=>{
+  try {
+    const {data}=await fetch('api/Reply/Get',{
+      method: 'POST',
+      body:JSON.stringify({NoteId:message.id}) ,
+    }).then(res=>res.json())
+console.log(data);
+
+    setAllReply(data)
+  } catch (error) {
+    console.error(error);
+    
+  }
+  }
+
+ const {register,handleSubmit}=useForm<Replytype>({
+    values:{
+      UserId:1,
+      content:'',
+      NoteId:message.id
+    }
+ })
  
-  
+useEffect(()=>{
+  // GetReply()
+})
   return <>
        <section>
         <Card Message={message}/>
        </section>
        <section className=''>
-         <form>
-         <textarea id="story" name="story" rows={2} placeholder='请输入自己的内容.....' className='w-full p-2 border-dodgerblue border-2 border-solid'></textarea>
+         <form onSubmit={handleSubmit(Reply)}>
+        <textarea id="story"  rows={2}  {...register('content')} placeholder='请输入自己的内容.....' className='w-full p-2 border-dodgerblue border-2 border-solid'></textarea>
          <div className='flex w-full justify-between'>
          <input className='border-dodgerblue border-2 border-solid flex-4' type="text"  placeholder='匿名'  name="" id="" />
-         <button className='bg-[black] text-textcolor w-14 rounded-xl flex-1'>评论</button>
+         <button type='submit' className='bg-[black] text-textcolor w-14 rounded-xl flex-1'>评论</button>
           </div>  
          </form>
        </section>
        <section className='w-full flex flex-col justify-start overflow-y-auto'>
-        <span onClick={()=>{Reply()}}>评论 {arr.length}</span>
+        <span >评论 {AllReply.length}</span>
         {
-          arr.map((el,index)=>{
+          AllReply.map((el,index)=>{
             return <div key={index}>
               <div className='flex  p-1 mb-3   '>
                 <section className='m-1 f-3'>
                   {/* <Image width={30} height={30} className='w-10 h-10 rounded-full' src={el.Headphoto} alt="" /> */}
                 </section>
                 <section className='flex-1'>
-                  <span className='text-sm font-serif'>{el.name} {el.time}</span>
+                  <span className='text-sm font-serif'>匿名 {el.createdAt?.split('T')[0]} </span>
                   <section className='text-sm  h-2/3'>
                     {el.content}
-                    {el.content}
-                    {el.content}
-                  
                   </section>
                 </section>
               </div>

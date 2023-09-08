@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import {useRouter} from 'next/router';
+
 import prisma from '@/until/prisma'
 import Token from '@/pages/api/token';
 export default async function handler(
@@ -11,12 +11,14 @@ export default async function handler(
   try {
     const result = await prisma.reply.create({
       data:{
-        noteId: a.noteId,
+        noteId: a.NoteId,
         content:a.content,
-        userId: a.userId
+        userId: a.UserId
       }
     })
-    return response.status(200).json({ ok:'删除成功' ,data:result});
+   
+    
+    return response.status(200).json({ ok:'添加成功' ,data:result});
   } catch (error) {
     return response.status(500).json({ error });
   }

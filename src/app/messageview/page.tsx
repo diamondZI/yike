@@ -26,6 +26,8 @@ export default function Page(){
           method:'POST',
           body: JSON.stringify({id:1})
         }).then(response =>response.json())   
+        console.log("1");
+           
         setmessages(data)
       }catch{
         console.error("Error");
@@ -48,14 +50,7 @@ console.log(Note);
       
       // setmessages({messages,...data});        
     }
-    const CreateReply=async function(){
-      const {data}=await fetch('api/Note/Get/GetNote',{
-        method:'POST',
-        body: JSON.stringify({id:1})
-      }).then(response =>response.json())   
-      setmessages(data);   
-      return  data
-    }
+   
     const Setdisply=(index:number)=>{
    setindex(index)
       usedisply(true)
@@ -63,10 +58,10 @@ console.log(Note);
     useEffect(()=>{
       addCard()
       
-    })
+    },[])
     
     return <>
-    <div >
+    <div>
     
     <TitleName title="留言墙" message="很多事情值得记录,当然也值得回味"></TitleName>
     <div className='px-12 transition-all' >

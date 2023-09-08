@@ -5,6 +5,10 @@ import Nav from '@/components/nav'
 import Footer from '@/components/footer'
 import {usePathname} from 'next/navigation'
 import {useAutoAnimate} from '@formkit/auto-animate/react'
+export const metadata = {
+  title: 'Airbnb',
+  description: 'Airbnb Clone',
+}
 export default function RootLayout({
   children,
 }: {

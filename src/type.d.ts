@@ -1,3 +1,4 @@
+
 declare interface Message{
   id: number,
   title:string
@@ -9,9 +10,9 @@ declare interface Message{
   url?:string
   createdAt:string
 }
-declare interface Reply{
-  name:string, 
-  Headphoto:string,
-  time: string  ,
-  content:string
+declare interface Replytype{
+  UserId:number,
+  NoteId:number,
+  content:string,
+  createdAt?:string
 }
