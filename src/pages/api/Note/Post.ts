@@ -7,21 +7,25 @@ export default async function handler(
   response: NextApiResponse,
 ) {
   const a=JSON.parse(request.body)
-  console.log(a);
+const token=request.headers['authorization']
   
-await Token(request, response)
-  try {
-    const result = await prisma.note.create({
-      data:{
-        userId:a.UserId,
-        content:a.content,
-        title:a.title,
-        statusId:a.statusId,
-        url:a.url
-      }
-    })
-    return response.status(200).json({ ok:'添加成功' ,data:result});
-  } catch (error) {
-    return response.status(500).json({ error });
+const  {ok,msg,err}= Token(token)
+  if (ok) {
+    try {
+      const result = await prisma.note.create({
+        data:{
+          userId:a.UserId,
+          content:a.content,
+          title:a.title,
+          statusId:a.statusId,
+          url:a.url
+        }
+      })
+      return response.status(200).json({ ok:'添加成功' ,data:result});
+    } catch (error) {
+      return response.status(500).json({ error });
+    }
+  }else{
+    return response.status(200).json({ ok:msg ,err});
   }
 }

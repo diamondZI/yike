@@ -3,7 +3,7 @@
 import TitleName from '@/components/titleName'
 import Classification from '@/components/Classification'
 import Card from '@/components/card'
-import {Read as Readview,Write as Writeview} from '@/components/form'
+import {Read as Readview, Write as Writeview} from '@/components/form'
 import { useState,useEffect } from "react";
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 import {MaterialSymbolsAddCircleOutlineRounded} from '@/until/icon'
@@ -39,16 +39,16 @@ export default function Page(){
     }
     const CreateCard=async function(Note:Message){
       const token=localStorage.getItem('token') as string
-console.log(Note);
 
       const {data}=await fetch('api/Note/Post',{
         method:'POST',
         body: JSON.stringify(Note),
         headers:new Headers({'authorization':token})
       }).then(response =>response.json())  
-      console.log({...messages,data});
+  console.log({...messages,...data});
+  
       
-      // setmessages({messages,...data});        
+      // setmessages({...messages,...data});        
     }
    
     const Setdisply=(index:number)=>{
@@ -81,11 +81,13 @@ console.log(Note);
      </div>
     </div>
     
-     <Drawer mode='Read' show={display} setshow={usedisply}>
+     <Drawer mode={true} show={display} setshow={usedisply}>
       <Readview message={messages[index]}></Readview>
      </Drawer>
-     <Drawer mode='Write' show={create} setshow={addCreate}>
+     <Drawer mode={false} show={create} setshow={addCreate} >
+    
       <Writeview CreateCard={CreateCard}></Writeview>
+      
      </Drawer>
     </>
 }

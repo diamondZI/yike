@@ -2,7 +2,7 @@ interface Drawertype{
   show:boolean,
   setshow:(a:boolean,b?:any)=>void,
   children:React.ReactNode
-  mode:'Read'|'Write'
+  mode:boolean
 }
 import {MaterialSymbolsClose} from '@/until/icon'
 export default function  Drawer({show,setshow,children,mode}:Drawertype){
@@ -14,7 +14,7 @@ export default function  Drawer({show,setshow,children,mode}:Drawertype){
         className="p-2 animate-wiggle   right-0  w-72 h-[100%] bg-textcolor absolute flex flex-col items-center">
          <div className='w-full mb-2  flex  items-center justify-between'>
           {
-            mode==='Read' ? <span className="text-sm " >
+            mode? <span className="text-sm " >
             <a href="" className="text-buttoncolor m-1 ">联系墙主撕掉该标签</a>
             <a className="text-[red] m-1">举报</a>
           </span>: <span className="text-sm ">
@@ -25,7 +25,9 @@ export default function  Drawer({show,setshow,children,mode}:Drawertype){
             <MaterialSymbolsClose onClick={()=>{setshow(false)}} className='text-lg'/>
            </span>
          </div>
-         {children }
+         <div>
+         {children}
+         </div>
         
          
       </div>

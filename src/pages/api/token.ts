@@ -1,24 +1,21 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import  JWT  from 'jsonwebtoken';
 
-
-export default async function handler(
-  request: NextApiRequest,
-  response: NextApiResponse,
-) {
-  const {authorization} =await request.headers
-  const token = authorization
-  if (token==='null'||!token) response.status(200).json({err:"not token"})    
+import  JWT from 'jsonwebtoken';
+interface Token{
+  ok:boolean,
+  msg:string,
+  err?:string}
+export default  function handler(token?:string):Token 
+{
+  if (token==='null'||!token) return {msg:'null',ok:false}   
  if (token) {
   JWT.verify(token, 'Josiah', (err, data) => {
-    if (err && err.message === 'invalid token') return response.status(400).json({ message: '无效 token', code: 0 })
-
-    if (err && err.message === 'jwt expired') return response.status(400).json({ message: 'token 失效', code: 0 })
-
-    if (!err) {
-       return 
-    }
+    if (err && err.message === 'invalid token') return {msg:"无效token",ok:false,err:err};
+    if (err && err.message === 'jwt expired') return {msg:"token失效",ok:false,err:err};
+    
   })  
  }
+ 
+  return {ok:true,msg:"登录成功"}
+
 }
 

@@ -12,8 +12,8 @@ export const Read= ({message}:{message:Message})=>{
       body:JSON.stringify(data) ,
       headers: new Headers({'authorization':localStorage.getItem('token') as string}) 
     }).then(res=>res.json())
-    console.log(MessageReply);
-
+    // setAllReply({...AllReply,MessageReply})
+    
     
   }
   const GetReply=async ()=>{
@@ -22,8 +22,6 @@ export const Read= ({message}:{message:Message})=>{
       method: 'POST',
       body:JSON.stringify({NoteId:message.id}) ,
     }).then(res=>res.json())
-console.log(data);
-
     setAllReply(data)
   } catch (error) {
     console.error(error);
@@ -40,8 +38,8 @@ console.log(data);
  })
  
 useEffect(()=>{
-  // GetReply()
-})
+  GetReply()
+},[])
   return <>
        <section>
         <Card Message={message}/>
@@ -85,10 +83,9 @@ export const Write= ({CreateCard}:{CreateCard:Function})=>{
   const {register,setValue,handleSubmit}=UseForm<Message>()
   const onSubmit: SubmitHandler<Message>=async (data) => {
      let res= await CreateCard({UserId:2,url:'NULL',...data})
-  console.log(res);
+     
   
   }
-
     const [active,useactive]=useState(1)
     const Useactive=(a:number)=>{
       useactive(a)
@@ -113,7 +110,7 @@ export const Write= ({CreateCard}:{CreateCard:Function})=>{
        </section>
        <section className='flex justify-around w-full h-8 px-1 absolute bottom-4'>
           <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' onClick={()=>{}}>丢弃</button>
-          <button type='submit' onClick={()=>{}} className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor' >确认</button>
+          <button type='submit'  className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor' >确认</button>
        </section>
       </form>
 
