@@ -1,63 +1,56 @@
 import Card from '@/components/card'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Classification from './Classification'
 import {useForm as UseForm,SubmitHandler, useForm, Form} from 'react-hook-form';
-
+import {useAutoAnimate} from '@formkit/auto-animate/react';
 export const Read= ({message}:{message:Message})=>{
-  const [AllReply,setAllReply]=useState<Replytype[]>([])
-  
+  const [AllReply,setAllReply]=useState<Replytype[]>(message.replies) 
   const Reply=async (data:Replytype)=>{
     const MessageReply=await fetch('api/Reply/Post',{
       method: 'POST',
       body:JSON.stringify(data) ,
       headers: new Headers({'authorization':localStorage.getItem('token') as string}) 
     }).then(res=>res.json())
-    // setAllReply({...AllReply,MessageReply})
+  
+   
+    setAllReply([...AllReply,MessageReply.data])
+    // console.log(MessageReply);
     
     
   }
-  const GetReply=async ()=>{
-  try {
-    const {data}=await fetch('api/Reply/Get',{
-      method: 'POST',
-      body:JSON.stringify({NoteId:message.id}) ,
-    }).then(res=>res.json())
-    setAllReply(data)
-  } catch (error) {
-    console.error(error);
-    
-  }
-  }
-
- const {register,handleSubmit}=useForm<Replytype>({
+  const {register,handleSubmit}=useForm<Replytype>({
     values:{
       UserId:1,
       content:'',
       NoteId:message.id
     }
- })
+  })
+  const [ref]=useAutoAnimate()
+  
+ useEffect(()=>{
+ console.log(AllReply);
  
-useEffect(()=>{
-  GetReply()
-},[])
+ },[AllReply])
+
   return <>
-       <section>
+       <section className='w-full flex justify-center my-2'>
         <Card Message={message}/>
        </section>
        <section className=''>
          <form onSubmit={handleSubmit(Reply)}>
         <textarea id="story"  rows={2}  {...register('content')} placeholder='请输入自己的内容.....' className='w-full p-2 border-dodgerblue border-2 border-solid'></textarea>
          <div className='flex w-full justify-between'>
-         <input className='border-dodgerblue border-2 border-solid flex-4' type="text"  placeholder='匿名'  name="" id="" />
+         <input className='border-dodgerblue  border-2 border-solid mx-2 ' type="text"  placeholder='匿名'  name="" id="" />
          <button type='submit' className='bg-[black] text-textcolor w-14 rounded-xl flex-1'>评论</button>
           </div>  
          </form>
        </section>
-       <section className='w-full flex flex-col justify-start overflow-y-auto'>
-        <span >评论 {AllReply.length}</span>
-        {
+       <section  className='w-full mt-1 h-[58vh] overflow-auto  flex flex-col  justify-start overflow'>
+        <span className='sticky top-0 bg-textcolor'>评论 {AllReply.length}</span>
+     
+       {
           AllReply.map((el,index)=>{
-            return <div key={index}>
+            return <div key={el.id} ref={ref}>
               <div className='flex  p-1 mb-3   '>
                 <section className='m-1 f-3'>
                   {/* <Image width={30} height={30} className='w-10 h-10 rounded-full' src={el.Headphoto} alt="" /> */}
@@ -72,6 +65,7 @@ useEffect(()=>{
             </div>
           })
         } 
+      
        </section>
     
      </>
@@ -80,17 +74,19 @@ useEffect(()=>{
 }
 export const Write= ({CreateCard}:{CreateCard:Function})=>{
   const Color=[ 'yellow','dodgerblue','yellowbody','darkorange']
-  const {register,setValue,handleSubmit}=UseForm<Message>()
+  const [active,useactive]=useState(1)
+  const {register,setValue,handleSubmit,getValues}=UseForm<Message>()
   const onSubmit: SubmitHandler<Message>=async (data) => {
+      data.statusId=active
      let res= await CreateCard({UserId:2,url:'NULL',...data})
+     console.log(res);
      
-  
   }
-    const [active,useactive]=useState(1)
+    
     const Useactive=(a:number)=>{
       useactive(a)
-      setValue('statusId',a)
     }
+    
     const [bgcolor,changeBgcolor]=useState('yellow')
   const ClassificationArray=['全部','留言','目标','理想','过去','将来','爱情','亲情','友情','秘密','信条','无题']
   
@@ -106,7 +102,7 @@ export const Write= ({CreateCard}:{CreateCard:Function})=>{
        <input placeholder='留言...' {...register('title')} className='bg-[rgb(0,0,0,0)] p-1 text-sm outline-none border-2 border-solid border-textcolor w-full'></input>
        </section>
        <section className='w-full'>
-       <Classification Classification={ClassificationArray} active={active} useactive={Useactive} {...register('statusId')}></Classification>
+       <Classification Classification={ClassificationArray} active={active} useactive={Useactive} ></Classification>
        </section>
        <section className='flex justify-around w-full h-8 px-1 absolute bottom-4'>
           <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' onClick={()=>{}}>丢弃</button>

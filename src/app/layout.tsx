@@ -5,7 +5,7 @@ import Nav from '@/components/nav'
 import Footer from '@/components/footer'
 import {usePathname} from 'next/navigation'
 import {useAutoAnimate} from '@formkit/auto-animate/react'
-
+import Head from 'next/head';
 export default function RootLayout({
   children,
 }: {
@@ -15,6 +15,10 @@ export default function RootLayout({
   const [auto]=useAutoAnimate()
   return (
     <html lang="en"  className='bg-dodgerblue text-[1.125rem] '>
+        <head>
+        <title>一刻时光</title>
+        <meta property="og:title" content="一刻时光" key="title" />
+       </head> 
       <body className='flex flex-col'>
       <header>  
      

@@ -21,6 +21,8 @@ const  {ok,msg,err}= Token(token)
           url:a.url
         }
       })
+      console.log(result);
+      
       return response.status(200).json({ ok:'添加成功' ,data:result});
     } catch (error) {
       return response.status(500).json({ error });
