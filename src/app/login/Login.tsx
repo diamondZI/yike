@@ -3,21 +3,26 @@ import {inter} from '@/style/font';
 import {useForm as UseForm,SubmitHandler} from 'react-hook-form';
 interface User{
   name?:String 
-  email:String
+  email?:String
   password:String
 }
+import fn from '@/until/api'
+import {Getuserinfo} from '@/features/module/User'
+import {useAppDispatch} from '@/features/hooks'
 export default function moduleName(){
   const {register,handleSubmit,watch,formState:{errors}}=UseForm<User>({
   })
+  const dispatch =useAppDispatch()
+  const {POST_NOTOKEN}=fn()
   const onSubmit: SubmitHandler<User>=async (data) => {
-    const res=await fetch('api/User/Get/login',{method:'POST',headers:{
-    } , body:JSON.stringify(data)}).then(response =>response.json())
-     const {token}=res
-console.log(res);
-
-     if (token) {
-      localStorage.setItem('token',token)
-     }
+    const res =await POST_NOTOKEN('api/User/Get/login',data) 
+    if (res.data) {
+      dispatch(Getuserinfo({value:res.data, token:res.token}))
+      console.log(res);
+      
+    }else{
+      console.error(res.err);
+    }
   }
 
   return <form className='flex flex-col items-center w-full' onSubmit={handleSubmit(onSubmit)}>

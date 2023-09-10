@@ -7,7 +7,7 @@ export default async function handler(
   response: NextApiResponse,
 ) {
   const a=JSON.parse(request.body)
-await Token(request, response)
+// await Token()
   try {
     const result = await prisma.note.update({
       where:{

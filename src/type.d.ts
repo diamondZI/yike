@@ -1,3 +1,5 @@
+// Limport type {User} from '@prisma/client';
+
 
 declare interface Message{
   id: number,
@@ -6,7 +8,7 @@ declare interface Message{
   statusId: number,
   Like?:number,
   content:string,
-  replies:[],
+  replies:Replytype[],
   url?:string
   createdAt:string
 }
@@ -16,4 +18,7 @@ declare interface Replytype{
   NoteId:number,
   content:string,
   createdAt?:string
+}
+declare type initiastate={
+  value:number
 }

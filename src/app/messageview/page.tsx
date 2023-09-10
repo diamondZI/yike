@@ -8,6 +8,11 @@ import { useState,useEffect } from "react";
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 import {MaterialSymbolsAddCircleOutlineRounded} from '@/until/icon'
 import Drawer from '../../components/Drawer'
+import useSWR from 'SWR';
+import fn from '@/until/api';
+import  {useAppDispatch,useAppSelector} from '@/features/hooks';
+import  {GetAllNote,PostNote} from '@/features/module/Note';
+import { data } from 'autoprefixer'
 
 export default function Page(){
     const [active,useactive]=useState(0)
@@ -15,32 +20,26 @@ export default function Page(){
     const [display,usedisply] =useState(false)
     const [create,addCreate] =useState(false)
     const ClassificationArray=['全部','留言','目标','理想','过去','将来','爱情','亲情','友情','秘密','信条','无题']
-    const [messages,setmessages]=useState<Message[]>([])
-    
+    // const [messages,setmessages]=useState<Message[]>([])
+    const messages =useAppSelector(state=>state.Note)
+    const dispatch=useAppDispatch()
+    const {GET,POST}=fn()
+    const User=useAppSelector(state=>state.User.id)
     const [parent]=useAutoAnimate({
       duration:300
     })
+
     const addCard=async function(){
-        const {data}=await fetch('api/Note/Get/GetNote',{
-          method:'POST',
-          body: JSON.stringify({id:1})
-        }).then(response =>response.json())   
-        setmessages(data)
+      const data=await GET('api/Note/Get/GetNote')
+    if (data) {
+      dispatch(GetAllNote(data))
+    }
     }
     const CreateCard=async function(Note:Message){
-      const token=localStorage.getItem('token') as string   
-      const {data}=await fetch('api/Note/Post',{
-        method:'POST',
-        body: JSON.stringify(Note),
-        headers:new Headers({'authorization':token})
-      }).then(response =>response.json())
-      console.log(data);
-      
-      console.log([...messages,data]);
+      const data=await POST<Message>('api/Note/Post',Note)
+      dispatch(PostNote(data))
        
-// setmessages([...messages, data]);
     }
-  
     const Setdisply=(index:number)=>{
       setindex(index)
       usedisply(true)
@@ -61,16 +60,20 @@ export default function Page(){
      <div className="flex justify-center flex-wrap " ref={parent} >
      {
      messages.map((messages,index)=>{
-           return  messages.statusId===active||active===0?<div key={messages.id} onClick={()=>{Setdisply(index)}} className='hover:border-2 hover:border-solid hover:border-yellow m-2'><Card    Message={messages} ></Card></div>:null
+           return  messages.statusId===active||active===0?<div key={messages.id} onClick={()=>{Setdisply(index)}} className='hover:-translate-y-2  hover:drop-shadow-lg hover:shadow-[black]'><Card    Message={messages} ></Card></div>:null
            })
      }
      </div>
-     <div onClick={()=>{addCreate(true)}} className='text-5xl  fixed right-0 bottom-0 cursor-pointer hover:text-greenyellow'>
+     <div onClick={()=>{
+      User?addCreate(true):console.log('需要登录');
+      
+     }}  className={
+      `text-5xl  fixed right-0 bottom-0 cursor-pointer ${User?'hover:text-greenyellow':'hover:text-[red] cursor-none'}`
+     }>
        <MaterialSymbolsAddCircleOutlineRounded/>
 
      </div>
     </div>
-    
      <Drawer mode={true} show={display} setshow={usedisply}>
       <Readview message={messages[index]}></Readview>
      </Drawer>

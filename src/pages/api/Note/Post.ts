@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import {useRouter} from 'next/router';
 import prisma from '@/until/prisma'
 import Token from '@/pages/api/token';
 export default async function handler(
@@ -21,13 +20,11 @@ const  {ok,msg,err}= Token(token)
           url:a.url
         }
       })
-      console.log(result);
-      
       return response.status(200).json({ ok:'添加成功' ,data:result});
     } catch (error) {
-      return response.status(500).json({ error });
+      return response.status(500).json({ok:false, error });
     }
   }else{
-    return response.status(200).json({ ok:msg ,err});
+    return response.status(404).json({ ok, err});
   }
 }
