@@ -6,7 +6,7 @@ interface User{
   email?:String
   password:String
 }
-import fn from '@/until/api'
+import fn from '@/hooks/api'
 import {Getuserinfo} from '@/features/module/User'
 import {useAppDispatch} from '@/features/hooks'
 export default function moduleName(){
@@ -18,8 +18,6 @@ export default function moduleName(){
     const res =await POST_NOTOKEN('api/User/Get/login',data) 
     if (res.data) {
       dispatch(Getuserinfo({value:res.data, token:res.token}))
-      console.log(res);
-      
     }else{
       console.error(res.err);
     }

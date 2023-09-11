@@ -17,10 +17,10 @@ const todosSlice = createSlice({
      return [...state,action.payload] 
    },
    PostReply:(state,{payload}:{payload:{
-    id:number,
-    replie:Replytype
-   }})=>{
-    state.find(el=>{
+     id:number,
+     replie:Replytype
+     }})=>{
+    state.map(el=>{
       if (el.id===payload.id) {
         el.replies.push(payload.replie)
       }

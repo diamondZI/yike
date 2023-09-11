@@ -3,20 +3,26 @@ import { useEffect, useMemo, useState } from 'react'
 import Classification from './Classification'
 import {useForm as UseForm,SubmitHandler, useForm, Form} from 'react-hook-form';
 import {useAutoAnimate} from '@formkit/auto-animate/react';
-import {useAppDispatch} from '@/features/hooks';
-import {useAppSelector} from '@/features/hooks';
+import {useAppDispatch,useAppSelector} from '@/features/hooks';
 import {PostReply} from '@/features/module/Note';
+import fn from '@/hooks/api'
 export const Read= ({message}:{message:Message})=>{
   const [AllReply,setAllReply]=useState<Replytype[]>(message.replies) 
   const UserID=useAppSelector(state=>state.User.id)
   const dispatch=useAppDispatch()
+  const {POST}=fn()
   const Reply=async (data:Replytype)=>{
-    const MessageReply=await fetch('api/Reply/Post',{
-      method: 'POST',
-      body:JSON.stringify(data) ,
-      headers: new Headers({'authorization':localStorage.getItem('token') as string}) 
-    }).then(res=>res.json())
-  console.log('1');
+    const MessageReply=await POST('api/Reply/Post', data)
+    if (MessageReply.ok) {
+      console.log(MessageReply);
+      dispatch(PostReply({id:message.id,replie:MessageReply.data}))
+    
+       
+    }else{
+      console.log(MessageReply);
+    }
+    
+    
   
 
   }

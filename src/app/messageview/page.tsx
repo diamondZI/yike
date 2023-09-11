@@ -9,7 +9,7 @@ import {useAutoAnimate} from '@formkit/auto-animate/react'
 import {MaterialSymbolsAddCircleOutlineRounded} from '@/until/icon'
 import Drawer from '../../components/Drawer'
 import useSWR from 'SWR';
-import fn from '@/until/api';
+import fn from '@/hooks/api';
 import  {useAppDispatch,useAppSelector} from '@/features/hooks';
 import  {GetAllNote,PostNote} from '@/features/module/Note';
 import { data } from 'autoprefixer'
@@ -31,13 +31,15 @@ export default function Page(){
 
     const addCard=async function(){
       const data=await GET('api/Note/Get/GetNote')
-    if (data) {
+      if (data) {
       dispatch(GetAllNote(data))
-    }
+      }
     }
     const CreateCard=async function(Note:Message){
       const data=await POST<Message>('api/Note/Post',Note)
-      dispatch(PostNote(data))
+      if (data.ok) {
+        
+      }
        
     }
     const Setdisply=(index:number)=>{

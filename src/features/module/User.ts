@@ -14,11 +14,20 @@ const todosSlice = createSlice({
    }})=>{
         state=payload.value
         localStorage.setItem('token',payload.token)
+        localStorage.setItem('User',JSON.stringify(payload.value))
         return state
+   },
+   lodeuserinfo: (state)=>{
+ const User =localStorage.getItem('User') as string
+ console.log(User);
+ 
+  state=JSON.parse(User)
+    return state
    }
+ 
   }
 })
 
-export const { Getuserinfo } = todosSlice.actions
+export const { Getuserinfo,lodeuserinfo } = todosSlice.actions
 
 export default todosSlice.reducer

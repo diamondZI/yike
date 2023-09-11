@@ -12,7 +12,7 @@ export default function Fetch(){
       
       return res.data
   }
-  async function POST<T>(key:string, value:T){
+  async function POST<T>(key:string, value?:T){
     const res= await fetch(key,
       {
        method: 'POST',
@@ -20,7 +20,7 @@ export default function Fetch(){
        body:JSON.stringify(value)
       }  
      ).then(res=>res.json());
-     return res.data
+    return res
     }
     async function POST_NOTOKEN<T>(key:string, value:T){
     const res= await fetch(key,
@@ -33,8 +33,5 @@ export default function Fetch(){
   }
   function UPDATA(){}
   function DELETE(){}
- 
-
-
   return {GET,POST,UPDATA,DELETE,POST_NOTOKEN}
 }

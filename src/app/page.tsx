@@ -1,12 +1,40 @@
 'use client'
 import Title from '@/components/titleName'
 import {useState} from 'react'
+import {useEffect} from 'react'
 import Link from 'next/link'
+import fn from '@/hooks/api'
+import {useAppDispatch} from '@/features/hooks'
+import {lodeuserinfo} from '@/features/module/User'
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 export default function Home( 
   ) {
    const [loginkey,setkey]=useState(false)
    const [auto]=useAutoAnimate()
+   const dispatch=useAppDispatch()
+   
+   async function userinfo() {
+    const {POST}=fn()
+    const User=localStorage.getItem('User') 
+    if (User) {
+    const res=await POST('api/User/userinfo',JSON.parse(User))
+    console.log(res);
+    
+     if (!res.ok) {
+      localStorage.removeItem('User')
+      localStorage.removeItem('token')
+      console.log('清理完成');
+     }else{ 
+     
+     dispatch(lodeuserinfo())
+    }
+    }
+  }
+  useEffect(()=>{
+  console.log("!");
+  
+   userinfo()
+  },[])
   return (
     <div  ref={auto}>
      <Title title='登录吧!' message='参与或观光,匿名或真性,open U head'></Title>

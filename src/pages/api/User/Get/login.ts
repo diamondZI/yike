@@ -7,7 +7,7 @@ export default async function handler(
   response: NextApiResponse,
 ) {
   const data=JSON.parse(request.body)
-  const token=await JWT.sign(data, 'Josiah',{expiresIn:60*60*36})
+  const token=await JWT.sign(data, 'Josiah',{expiresIn:60*60*24})
   try {
     const result = await prisma.user.findFirst({
       where:{
@@ -15,7 +15,7 @@ export default async function handler(
         email: data.email
       }
     })
-    console.log(result);
+    
    if (result) {
     return response.status(200).json({ ok:'登陆成功' ,token:token,data:result});
    }else{

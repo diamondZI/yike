@@ -18,14 +18,13 @@ export default async function handler(
           userId: a.UserId
         }
       })
-     console.log({ ok:'添加成功' ,data:result});
-     
-      
-      return response.status(200).json({ ok:'添加成功' ,data:result});
+      return response.status(200).json({ ok:'添加成功',data:result});
     } catch (error) {
+      console.log(error);
+      
       return response.status(500).json({ error });
     }
   }else{
-    return response.status(401).json({ error:err });
+    return response.status(401).json({ok,msg,err });
   }
 }

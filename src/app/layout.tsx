@@ -7,13 +7,18 @@ import {usePathname} from 'next/navigation'
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 import {Provider} from 'react-redux';
 import store from '@/features/index';
+
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
   const Router= usePathname()
   const [auto]=useAutoAnimate()
+
+ 
   return (
     <Provider store={store}>
       <html lang="en"  className='bg-dodgerblue text-[1.125rem] '>
