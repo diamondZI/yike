@@ -6,9 +6,9 @@ import Image from 'next/image'
 import {inter} from '@/app/style/font'
 import Register from './Register';
 import Login from './Login';
-import {useRouter} from 'next/navigation'
+import {useRouter as UseRouter} from 'next/navigation'
 export default function page(){
- const Router=useRouter()
+ const Router=UseRouter()
  
   return <div className='relative -translate-x-[50%] lg:top-[50px] left-[50%] bg-textcolor shadow-sm md:rounded-md shadow-buttoncolor w-full h-[calc(100vh-2.5rem)] md:w-96 md:h-[31.25rem] border-yellow px-3 border border-solid '>
           <div className='flex cursor-pointer justify-center  h-12 w-full '>

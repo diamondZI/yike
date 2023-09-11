@@ -10,7 +10,7 @@ import {MaterialSymbolsAddCircleOutlineRounded} from '@/until/icon'
 import Drawer from '../../components/Drawer'
 import useSWR from 'SWR';
 import fn from '@/hooks/api';
-import  {useAppDispatch,useAppSelector} from '@/features/hooks';
+import  {useAppDispatch as UseAppDispatch ,useAppSelector} from '@/features/hooks';
 import  {GetAllNote,PostNote} from '@/features/module/Note';
 import { data } from 'autoprefixer'
 
@@ -22,7 +22,7 @@ export default function Page(){
     const ClassificationArray=['全部','留言','目标','理想','过去','将来','爱情','亲情','友情','秘密','信条','无题']
     // const [messages,setmessages]=useState<Message[]>([])
     const messages =useAppSelector(state=>state.Note)
-    const dispatch=useAppDispatch()
+    const dispatch=UseAppDispatch()
     const {GET,POST}=fn()
     const User=useAppSelector(state=>state.User.id)
     const [parent]=useAutoAnimate({
@@ -48,7 +48,6 @@ export default function Page(){
     }
     useEffect(()=>{
       addCard()
-      
     },[])
     
     return <>

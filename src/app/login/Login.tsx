@@ -8,11 +8,11 @@ interface User{
 }
 import fn from '@/hooks/api'
 import {Getuserinfo} from '@/features/module/User'
-import {useAppDispatch} from '@/features/hooks'
+import {useAppDispatch as UseAppDispatch} from '@/features/hooks'
 export default function moduleName(){
   const {register,handleSubmit,watch,formState:{errors}}=UseForm<User>({
   })
-  const dispatch =useAppDispatch()
+  const dispatch =UseAppDispatch()
   const {POST_NOTOKEN}=fn()
   const onSubmit: SubmitHandler<User>=async (data) => {
     const res =await POST_NOTOKEN('api/User/Get/login',data) 
