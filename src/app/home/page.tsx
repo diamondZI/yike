@@ -1,12 +1,11 @@
 'use client'
 
 import TitleName from '@/components/titleName'
-import Image from 'next/image'
+
 import Drawer from '@/components/Drawer'
 import {Write} from '@/components/form'
-import { useEffect, useState} from "react";
-import {useAppDispatch,useAppSelector} from '@/features/hooks';
-import { GetAllNote,PostNote } from '@/features/module/Note'
+import {useState} from "react";
+import {useAppDispatch} from '@/features/hooks';
 
 export default function Page(){
   const [active,useactive]=useState(0)

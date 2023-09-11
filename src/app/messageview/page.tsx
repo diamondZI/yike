@@ -8,11 +8,11 @@ import { useState,useEffect } from "react";
 import {useAutoAnimate} from '@formkit/auto-animate/react'
 import {MaterialSymbolsAddCircleOutlineRounded} from '@/until/icon'
 import Drawer from '../../components/Drawer'
-import useSWR from 'SWR';
+
 import fn from '@/hooks/api';
 import  {useAppDispatch as UseAppDispatch ,useAppSelector} from '@/features/hooks';
-import  {GetAllNote,PostNote} from '@/features/module/Note';
-import { data } from 'autoprefixer'
+import  {GetAllNote} from '@/features/module/Note';
+
 
 export default function Page(){
     const [active,useactive]=useState(0)
