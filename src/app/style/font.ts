@@ -1,4 +1,4 @@
-import { Inter, Lora, Source_Sans_3,Ma_Shan_Zheng } from 'next/font/google'
+import { Inter, Lora, Source_Sans_3,Ma_Shan_Zheng,} from 'next/font/google'
 import localFont from 'next/font/local'
  
 // define your variable fonts

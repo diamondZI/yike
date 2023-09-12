@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import Dark from '@/components/Dark';
+import Profile from '@/components/Profile';
 export default function Nav({route}:{route:string|null}){
    
   return <>
@@ -23,7 +25,10 @@ export default function Nav({route}:{route:string|null}){
    </Link> 
  </span>
  </div>
-
+ <div  className='flex absolute right-2 items-center' > 
+  <Dark/>
+  <Profile/>
+</div>   
   </nav>
   </>
 }

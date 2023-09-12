@@ -21,7 +21,8 @@ export default function RootLayout({
  
   return (
     <Provider store={store}>
-      <html lang="en"  className='bg-dodgerblue text-[1.125rem] '>
+      <html lang="en"  className="
+       bg-[url(./style/sea.jpg)] dark:bg-[url(./style/R.png)] text-[1.125rem] ">
         <head>
         <title>一刻时光</title>
         <meta property="og:title" content="一刻时光" key="title" />
@@ -31,12 +32,10 @@ export default function RootLayout({
      
          <Nav route={Router}/>
       </header>
-       <main className='min-h-[calc(100vh-2.5rem)]' ref={auto} >
+       <main className='min-h-[calc(100vh-2.5rem)] ' ref={auto} >
         {children}
        </main>
-       <footer className='flex-2'>
-        <Footer/>
-       </footer>
+       
       </body>
     </html>
     </Provider>

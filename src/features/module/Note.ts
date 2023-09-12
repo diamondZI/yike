@@ -1,8 +1,5 @@
 
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../index';
-import a from '@/hooks/form';
-import { Reply } from '@prisma/client';
 const  initialState:Message[]=[];
 const todosSlice = createSlice({
   name: 'User',
@@ -33,5 +30,5 @@ const todosSlice = createSlice({
 })
 
 export const { GetAllNote,PostNote,PostReply } = todosSlice.actions
-export const selectCount = (state:RootState) => state.todos.value
+
 export default todosSlice.reducer

@@ -13,6 +13,7 @@
     "@formkit/auto-animate": "^0.7.0",
     "@prisma/client": "^5.2.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@vercel/postgres": "^0.4.1",

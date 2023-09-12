@@ -19,8 +19,7 @@ const todosSlice = createSlice({
    },
    lodeuserinfo: (state)=>{
  const User =localStorage.getItem('User') as string
- console.log(User);
- 
+
   state=JSON.parse(User)
     return state
    }

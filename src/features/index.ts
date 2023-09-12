@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import todosReducer from './module/todoSlice'
 import Note from './module/Note';
 import User from './module/User';
 
 
 const store = configureStore({
   reducer: {
-    todos: todosReducer,
+    
     Note: Note,
     User:User
   }

@@ -1,7 +1,7 @@
 
 
 export default function Fetch(){
-  const token=localStorage.getItem('token') as string;
+  
   async function GET(key:string){
       const res= await fetch(key,
        {
@@ -13,6 +13,7 @@ export default function Fetch(){
       return res.data
   }
   async function POST<T>(key:string, value?:T){
+    const token=localStorage.getItem('token') as string;
     const res= await fetch(key,
       {
        method: 'POST',
