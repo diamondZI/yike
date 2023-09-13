@@ -23,10 +23,10 @@ export default function Page(){
       </div> 
       
     </div>
- 
+{/*  
     <Drawer mode={true} show={display} setshow={usedisply} >
-      <Write CreateCard={addCreate}/>
-    </Drawer>
+      <Write CreateCard={addCreate} setshow={setshow}/>
+    </Drawer> */}
     </>
 
 }

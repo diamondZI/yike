@@ -11,7 +11,7 @@ import Drawer from '../../components/Drawer'
 
 import fn from '@/hooks/api';
 import  {useAppDispatch as UseAppDispatch ,useAppSelector} from '@/features/hooks';
-import  {GetAllNote} from '@/features/module/Note';
+import  {GetAllNote,PostNote} from '@/features/module/Note';
 
 
 export default function Page(){
@@ -38,7 +38,7 @@ export default function Page(){
     const CreateCard=async function(Note:Message){
       const data=await POST<Message>('api/Note/Post',Note)
       if (data.ok) {
-        
+        dispatch(PostNote(data.data))
       }
        
     }
@@ -66,12 +66,12 @@ export default function Page(){
      }
      </div>
      <div onClick={()=>{
-      User?addCreate(true):console.log('需要登录');
+    addCreate(true)
       
      }}  className={
-      `text-5xl  fixed right-0 bottom-0 cursor-pointer ${User?'hover:text-greenyellow':'hover:text-[red] cursor-none'}`
+      `text-5xl  fixed right-0 bottom-0 cursor-pointer }`
      }>
-       <MaterialSymbolsAddCircleOutlineRounded/>
+       <MaterialSymbolsAddCircleOutlineRounded className='transition-all dark:text-Darktextcolor'/>
 
      </div>
     </div>
@@ -80,7 +80,7 @@ export default function Page(){
      </Drawer>
      <Drawer mode={false} show={create} setshow={addCreate} >
     
-      <Writeview CreateCard={CreateCard}></Writeview>
+      <Writeview CreateCard={CreateCard} setshow={addCard}></Writeview>
       
      </Drawer>
     </>

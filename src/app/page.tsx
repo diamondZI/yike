@@ -34,7 +34,7 @@ export default function Home() {
     <div  ref={auto}>
      <Title title='登录吧!' message='参与或观光,匿名或真性,open U head'></Title>
      { 
-    <section className='flex justify-around w-full h-96 items-center px-1 '>
+    <section className='flex  justify-around w-full h-96 items-center px-1 '>
       <button className='w-52 m-1 h-16 rounded-lg  bg-yellow text-lg border  transition-colors duration-500 border-[black] hover:bg-[black] hover:text-textcolor border-solid' onClick={()=>{Router.push('/messageview')}}  >游客</button>
      <Link href='/login'>
      <button onClick={()=>{setkey(true)}}  className='w-52 m-1 h-16 rounded-lg  bg-greenyellow text-lg hover:bg-[black] duration-500 hover:text-textcolor' >登录</button>

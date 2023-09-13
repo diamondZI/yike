@@ -5,7 +5,9 @@ import Profile from '@/components/Profile';
 export default function Nav({route}:{route:string|null}){
    
   return <>
-  <nav className='flex flex-1   justify-center w-full   bg-yellowbody h-10 items-center p-2'>
+  <nav className='flex 
+    bg-yellowbody dark:bg-[#010920] dark:text-[#3b4567]
+  flex-1   justify-center w-full  h-10 items-center p-2'>
 
  <Link href={"/"} className='flex absolute left-2 items-center' > 
 

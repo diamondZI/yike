@@ -1,5 +1,5 @@
 'use client'
-import {inter} from '@/app/style/font';
+import {inter} from '@/hooks/font';
 import {useForm as UseForm,SubmitHandler} from 'react-hook-form';
 interface User{
   name?:String 

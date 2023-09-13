@@ -1,20 +1,15 @@
 
-import IsDark from '@/hooks/spaghetti'
-
 import {useEffect,useState} from 'react';
-
-
- 
+import  {IcOutlineNightsStay,MaterialSymbolsLightModeOutlineSharp} from '@/until/icon'
 
 
 export default function Dark(){
   const [Mode,setMode]=useState(true)
-  const [theme,settheme]=useState(()=>{
-    return localStorage.theme
-   })
+  const [theme,settheme]=useState(()=>
+    localStorage.theme
+   )
    function cutover() {
     localStorage.theme === 'light'?localStorage.theme='dark':localStorage.theme='light';
-   console.log(localStorage.theme);
     settheme(localStorage.theme)
   }
   function DARK() {
@@ -30,12 +25,12 @@ export default function Dark(){
   })
 
   return (
-    <div onClick={()=>{cutover()}} className='w-14 rounded-lg m-2 bg-buttoncolor h-7 flex justify-between shadow-inner shadow-[black] dark:shadow-[red]'>
-    <div className='flex-1'>
-
-    </div>
-    <div className='flex-1'></div>
-    <div className={`absolute cursor-pointer transform transition-transform  h-7 w-7 bg-darkorange ${theme==='light'?'rounded-l-lg ':'rounded-r-lg  translate-x-full'}`}></div>
+    <div onClick={()=>{cutover()}} className='w-7 sm:w-14 rounded-lg m-2  sm:h-7 flex justify-between shadow-inner shadow-[black] dark:shadow-dodgerblue items-center'>
+   
+   <IcOutlineNightsStay className=' flex-1 text-buttoncolor text-lg'></IcOutlineNightsStay>   
+      <MaterialSymbolsLightModeOutlineSharp className='flex-1 text-lg'/>
+   
+    <div className={`absolute  cursor-pointer transform transition-transform  sm:h-7 w-[0.875rem] sm:w-7 bg-darkorange ${theme==='light'?'rounded-l-lg ':'rounded-r-lg  translate-x-full'}`}></div>
 
   </div>
   )

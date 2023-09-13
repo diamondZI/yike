@@ -15,7 +15,9 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+        // 'DarkImage':'url()',    
+        // 'LightImage':'url(./public/sea.jpg)',    
+        },
       keyframes:{
         wiggle: {
           '0%': { transform:'translateX(100%)' },
@@ -27,7 +29,8 @@ const config: Config = {
         'height': 'height',
         'width': 'width'
        
-      }
+      },
+     
     },
     animation:{
       
@@ -42,7 +45,10 @@ const config: Config = {
       yellowbody:'#fcf105',
       darkorange:'#f57d01',
       buttoncolor:'#2B5AED',
-      textcolor:'#fff'
+      textcolor:'#fff',
+      DarkBgColor:'#010920',
+      Darktextcolor:'#3b4567',
+      CardDarkColor:'rgb(47,42,26,.3)'
     }
   },
   plugins: [

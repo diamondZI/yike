@@ -13,17 +13,15 @@ export default function Fetch(){
       return res.data
   }
   async function POST<T>(key:string, value?:T){
-    const token=localStorage.getItem('token') as string;
     const res= await fetch(key,
       {
        method: 'POST',
-       headers:new Headers({'authorization':token}),
        body:JSON.stringify(value)
       }  
      ).then(res=>res.json());
     return res
     }
-    async function POST_NOTOKEN<T>(key:string, value:T){
+  async function POST_NOTOKEN<T>(key:string, value:T){
     const res= await fetch(key,
       {
        method: 'POST',

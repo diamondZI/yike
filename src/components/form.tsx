@@ -12,23 +12,16 @@ export const Read= ({message}:{message:Message})=>{
   const dispatch=useAppDispatch()
   const {POST}=fn()
   const Reply=async (data:Replytype)=>{
-    const MessageReply=await POST('api/Reply/Post', data)
+    const MessageReply:{ok:boolean,data:any}=await POST('api/Reply/Post', data)
     if (MessageReply.ok) {
       console.log(MessageReply);
-      dispatch(PostReply({id:message.id,replie:MessageReply.data}))
-    
-       
-    }else{
-      console.log(MessageReply);
+      dispatch(PostReply({id:message.id,replie:MessageReply.data})) 
+      setAllReply([...AllReply,data])    
     }
-    
-    
-  
-
   }
   const {register,handleSubmit}=useForm<Replytype>({
     values:{
-      UserId:UserID,
+      UserId:UserID?UserID:1,
       content:'',
       NoteId:message.id
     }
@@ -41,7 +34,7 @@ export const Read= ({message}:{message:Message})=>{
  },[AllReply])
 
   return <>
-       <section className='w-full flex justify-center '>
+       <section className='w-full flex justify-center dark:text-[black] dark:bg-buttoncolor m-1 '>
         <Card Message={message}/>
        </section>
        <section className=''>
@@ -49,21 +42,20 @@ export const Read= ({message}:{message:Message})=>{
         <textarea id="story"  rows={2}  {...register('content')} placeholder='请输入自己的内容.....' className='w-full h-16 p-2 border-dodgerblue border-2 border-solid'></textarea>
          <div className='flex w-full justify-between h-9'>
          <input className='border-dodgerblue w-2/3 border-2 border-solid m-1 ' type="text"  placeholder='匿名'   />
-         <button type='submit' className='bg-[black] text-textcolor rounded-xl flex-1'>评论</button>
+         <button type='submit' className='bg-[black] dark:bg-dodgerblue text-textcolor rounded-xl flex-1'>评论</button>
           </div>  
          </form>
        </section>
-       <span className='sticky top-0 bg-textcolor'>评论 {AllReply.length}</span>
+       <span className='sticky top-0 bg-textcolor dark:bg-DarkBgColor'>评论 {AllReply.length}</span>
 
-       <section  className='w-full  h-[58vh] overflow-auto  flex flex-col  justify-start overflow'>
+       <section  className='w-56 h-[58vh] overflow-auto  flex flex-col  justify-start overflow'>
       
        {
           AllReply.map((el,index)=>{
-            return <div key={el.id} ref={ref}>
+            return <div key={index} ref={ref}>
               <div className='flex  p-1 mb-3   '>
                 <section className='m-1 f-3'>
                  <div className='bg-yellow rounded-full w-7 h-7'>
-
                  </div>
                 </section>
                 <section className='flex-1'>
@@ -83,15 +75,18 @@ export const Read= ({message}:{message:Message})=>{
   
  
 }
-export const Write= ({CreateCard}:{CreateCard:Function})=>{
+export const Write= ({CreateCard,setshow}:{CreateCard:Function,setshow:Function})=>{
   const Color=[ 'yellow','dodgerblue','yellowbody','darkorange']
   const UserID=useAppSelector(state=>state.User.id)
   const [active,useactive]=useState(1)
   const {register,setValue,handleSubmit,getValues}=UseForm<Message>()
   const onSubmit: SubmitHandler<Message>=async (data) => {
       data.statusId=active
-     let res= await CreateCard({UserId:UserID,url:'NULL',...data})
-     console.log(res); 
+     let res= await CreateCard({UserId:UserID?UserID:1,url:'NULL',...data})
+     if (res) {
+      setshow(false)
+     }
+   
   }
      
     const Useactive=(a:number)=>{
@@ -110,14 +105,14 @@ export const Write= ({CreateCard}:{CreateCard:Function})=>{
        </section>
        <section className={`bg-${bgcolor} p-1 w-full h-56`}>
        <textarea placeholder='留言...' {...register('content')} className='bg-[rgb(0,0,0,0)] outline-none h-44 w-full '></textarea>
-       <input placeholder='留言...' {...register('title')} className='bg-[rgb(0,0,0,0)] p-1 text-sm outline-none border-2 border-solid border-textcolor w-full'></input>
+       <input placeholder='留言...' defaultValue={'留言'} {...register('title')} className='bg-[rgb(0,0,0,0)] p-1 text-sm outline-none border-2 border-solid border-textcolor w-full'></input>
        </section>
        <section className='w-full'>
        <Classification Classification={ClassificationArray} active={active} useactive={Useactive} ></Classification>
        </section>
        <section className='flex justify-around w-full h-8 px-1 absolute bottom-4'>
-          <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' onClick={()=>{}}>丢弃</button>
-          <button type='submit'  className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor' >确认</button>
+          <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' onClick={()=>{setshow(false)}}>丢弃</button>
+          <button type='submit'  className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor' onClick={()=>{setshow(false)}} >确认</button>
        </section>
       </form>
 

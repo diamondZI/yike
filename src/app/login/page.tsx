@@ -3,7 +3,7 @@
 import {MaterialSymbolsClose} from '@/until/icon'
 import Divider from '@/components/divider';
 import Image from 'next/image'
-import {inter} from '@/app/style/font'
+import {inter} from '@/hooks/font'
 import Register from '../../components/Login/Register';
 import Login from '../../components/Login/Login';
 import {useRouter as UseRouter} from 'next/navigation'

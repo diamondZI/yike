@@ -5,11 +5,11 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
-  const key=request.headers['authorization']
-  const {ok,msg,err}=Token(key)
+  
   request.method='POST'
   const a=JSON.parse(request.body)
-  if (ok) {
+ console.log(a);
+ 
     try {
       const result = await prisma.reply.create({
         data:{
@@ -20,11 +20,8 @@ export default async function handler(
       })
       return response.status(200).json({ ok:'添加成功',data:result});
     } catch (error) {
-      console.log(error);
-      
-      return response.status(500).json({ error });
+     
+      return response.status(500).json({ok:false, error });
     }
-  }else{
-    return response.status(401).json({ok,msg,err });
-  }
+  
 }

@@ -1,15 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/until/prisma'
-import Token from '@/pages/api/token';
+
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
   const a=JSON.parse(request.body)
-const token=request.headers['authorization']
-  
-const  {ok,msg,err}= Token(token)
-  if (ok) {
+
     try {
       const result = await prisma.note.create({
         data:{
@@ -24,7 +21,8 @@ const  {ok,msg,err}= Token(token)
     } catch (error) {
       return response.status(500).json({ok:false, error });
     }
-  }else{
-    return response.status(401).json({ ok, err,msg});
-  }
+
+
+
+
 }

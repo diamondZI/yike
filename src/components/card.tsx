@@ -7,7 +7,7 @@ export default function Nav({Message}:{Message:Message}){
 
  
   return <>
-  <div className='flex m-3 flex-col justify-between rounded-md  shadow-darkorange shadow-sm w-[12rem] p-1 bg-darkorange h-40'>
+  <div className='flex m-3 flex-col justify-between rounded-md  shadow-darkorange shadow-sm w-[12rem] p-1 bg-darkorange dark:bg-CardDarkColor  h-40'>
     <div className='flex-3 flex justify-between text-xs '>
       <span>{Message.updatedAt.split('T')[0]}</span>
        <span>{Message.statusId}</span>

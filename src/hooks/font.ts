@@ -3,5 +3,6 @@ import localFont from 'next/font/local'
  
 // define your variable fonts
 const inter = Ma_Shan_Zheng({weight:'400',subsets:['latin']})
+const Source = Source_Sans_3({weight:'400',subsets:['latin']})
 
-export { inter,  }
+export { inter, Source }
