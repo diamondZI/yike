@@ -79,13 +79,14 @@ export const Write= ({CreateCard,setshow}:{CreateCard:Function,setshow:Function}
   const Color=[ 'yellow','dodgerblue','yellowbody','darkorange']
   const UserID=useAppSelector(state=>state.User.id)
   const [active,useactive]=useState(1)
-  const {register,setValue,handleSubmit,getValues}=UseForm<Message>()
+  const {register,handleSubmit}=UseForm<Message>()
   const onSubmit: SubmitHandler<Message>=async (data) => {
       data.statusId=active
      let res= await CreateCard({UserId:UserID?UserID:1,url:'NULL',...data})
-     if (res) {
+    
       setshow(false)
-     }
+   
+    
    
   }
      
@@ -112,7 +113,7 @@ export const Write= ({CreateCard,setshow}:{CreateCard:Function,setshow:Function}
        </section>
        <section className='flex justify-around w-full h-8 px-1 absolute bottom-4'>
           <button className='w-2/5 m-1 h-full rounded-full  bg-textcolor border border-[black] border-solid' onClick={()=>{setshow(false)}}>丢弃</button>
-          <button type='submit'  className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor' onClick={()=>{setshow(false)}} >确认</button>
+          <button type='submit'  className='w-3/5 m-1 h-full rounded-full  bg-[black] hover:bg-buttoncolor text-textcolor' >确认</button>
        </section>
       </form>
 
