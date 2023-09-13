@@ -5,7 +5,7 @@ import  {IcOutlineNightsStay,MaterialSymbolsLightModeOutlineSharp} from '@/until
 
 export default function Dark(){
  
-  const [theme,settheme]=useState('dark')
+  const [theme,settheme]=useState('light')
    function cutover() {
    localStorage.theme === 'light'?localStorage.theme='dark':localStorage.theme='light';
     settheme(localStorage.theme)
