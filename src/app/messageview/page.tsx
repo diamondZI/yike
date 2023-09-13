@@ -29,12 +29,7 @@ export default function Page(){
       duration:300
     })
 
-    const addCard=async function(){
-      const data=await GET('api/Note/Get/GetNote')
-      if (data) {
-      dispatch(GetAllNote(data))
-      }
-    }
+    
     const CreateCard=async function(Note:Message){
       const data=await POST<Message>('api/Note/Post',Note)
       if (data.ok) {
@@ -42,12 +37,20 @@ export default function Page(){
       }
        
     }
+    const addCard=async function(){
+      const data=await GET('api/Note/Get/GetNote')
+      if (data) {
+      dispatch(GetAllNote(data))
+      }
+    }
     const Setdisply=(index:number)=>{
       setindex(index)
       usedisply(true)
     }
     useEffect(()=>{
+     
       addCard()
+       //eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
     return <>
@@ -80,7 +83,7 @@ export default function Page(){
      </Drawer>
      <Drawer mode={false} show={create} setshow={addCreate} >
     
-      <Writeview CreateCard={CreateCard} setshow={addCard}></Writeview>
+      <Writeview CreateCard={CreateCard} setshow={addCreate}></Writeview>
       
      </Drawer>
     </>

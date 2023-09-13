@@ -27,7 +27,7 @@ export default function RootLayout({
         <title>一刻时光</title>
         <meta property="og:title" content="一刻时光" key="title" />
        </head> 
-      <body className="flex bg-cover bg-no-repeat flex-col bg-[url('./style/sea.jpg')] dark:bg-[url('./style/R.png')] ">
+      <body className="flex bg-cover bg-no-repeat flex-col bg-[url('./styles/sea.jpg')] dark:bg-[url('./styles/R.png')] ">
       <header>  
      
          <Nav route={Router}/>
