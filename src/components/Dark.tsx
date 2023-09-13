@@ -1,22 +1,18 @@
-
+'use client'
 import {useEffect,useState} from 'react';
 import  {IcOutlineNightsStay,MaterialSymbolsLightModeOutlineSharp} from '@/until/icon'
 
 
 export default function Dark(){
-  const [Mode,setMode]=useState(true)
-  const [theme,settheme]=useState(()=>
-    localStorage.theme
-   )
+ 
+  const [theme,settheme]=useState('dark')
    function cutover() {
-    localStorage.theme === 'light'?localStorage.theme='dark':localStorage.theme='light';
+   localStorage.theme === 'light'?localStorage.theme='dark':localStorage.theme='light';
     settheme(localStorage.theme)
   }
-  function DARK() {
-    cutover()
-    setMode(!Mode)
-  }
+
   useEffect(()=>{
+    
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {     
       document.documentElement.classList.add('dark')
   } else {

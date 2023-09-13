@@ -1,5 +1,5 @@
 import Card from '@/components/card'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Classification from './Classification'
 import {useForm as UseForm,SubmitHandler, useForm, Form} from 'react-hook-form';
 import {useAutoAnimate} from '@formkit/auto-animate/react';
