@@ -8,12 +8,12 @@ import {MaterialSymbolsClose} from '@/until/icon'
 export default function  Drawer({show,setshow,children,mode}:Drawertype){
     return <>
       {show ? <div onDoubleClick={()=>{setshow(false)
-      }}  className=' fixed ease-in-out opacity-1 transition-opacity w-[100%] h-[100%] bg-[rgb(0,0,0,.1)] top-0 left-0 '>
+      }}  className='overflow-hidden  ease-in-out opacity-1 fixed transition-opacity w-[100%] h-[100%] bg-[rgb(0,0,0,.1)] top-0 left-0 '>
       <div  onClick={(e)=>{e.stopPropagation()
       }}
-        className="p-1 animate-wiggle   right-0  w-72 h-[100%] bg-textcolor  
+        className="p-1 animate-wiggle  right-0 absolute  w-72 h-[100%] bg-textcolor  
          dark:bg-DarkBgColor dark:text-Darktextcolor
-        absolute flex flex-col items-center">
+         flex flex-col items-center">
          <div className='w-full mb-2  flex  items-center justify-between'>
           {
             mode? <span className="text-sm " >

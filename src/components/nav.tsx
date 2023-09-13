@@ -22,7 +22,7 @@ export default function Nav({route}:{route:string|null}){
   </Link>
  </span>
  <span className={`m-1 py-1 px-3 ${route==='/home'?' bg-dodgerblue text-textcolor rounded-xl':''} `}>
-   <Link href='/home'>
+   <Link href='/Images'>
    照片墙
    </Link> 
  </span>
