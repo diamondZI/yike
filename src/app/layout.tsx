@@ -23,6 +23,8 @@ export default function RootLayout({
     <Provider store={store}>
       <html lang="en"  className="
      text-[1.125rem] max-w-[100vw] ">
+      <script defer data-domain="diamondqin.xyz" src="https://plausible.io/js/script.js"></script>
+
         <head>
         <title>一刻时光</title>
         <meta property="og:title" content="一刻时光" key="title" />
